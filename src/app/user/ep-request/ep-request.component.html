@@ -8,6 +8,7 @@
             <div class="search-container">
                 <div>
                     <button type="button" class="btn btn-warning" (click)="toggleAddForm()">Create New Request</button>
+                    1 - travel          2 - certification 
                     <div class="card mt-5" *ngIf="toggleAdd">
                         <div class="card-header bg-warning text-white">Create A Reimbursment Request</div>
                         <form #myFormTemplate="ngForm" (ngSubmit)="addRequest()">

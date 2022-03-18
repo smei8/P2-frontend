@@ -65,7 +65,7 @@ export class ListRequestComponent implements OnInit {
   loadAllRequests() {
     //this has current manager info that logged in
     let currentManager: any = this.authService.retrieveUser();
-    console.log(currentManager);
+    //console.log(currentManager);
 
     //get all requests from the backend and stored in response
     this.requestService.viewAllRequest().subscribe((response) => {
@@ -73,7 +73,7 @@ export class ListRequestComponent implements OnInit {
 
       for(let i = 0; i < response.length; i++) {
         if(response[i].manager == currentManager.userID) {
-          console.log(this.allRequests[i]);
+          //console.log(this.allRequests[i]);
           this.allRequests.push(response[i]);
         }  
       }
@@ -83,13 +83,13 @@ export class ListRequestComponent implements OnInit {
   loadPendingRequset() {
     let currentUser: any = this.authService.retrieveUser();
     this.requestService.viewAllRequest().subscribe((response) => {
-      console.log(response);
+      //console.log(response);
 
       for(let i = 0; i < response.length; i++) {
         if(response[i].reqStatus==1 && response[i].manager==currentUser.userID) {
-          console.log(response[i]);
+          //console.log(response[i]);
           this.allPRequests.push(response[i]);
-          console.log(this.allPRequests);
+          //console.log(this.allPRequests);
         } else {
           this.noPendingMessage="No Pending Request Yet"
         }
@@ -98,8 +98,8 @@ export class ListRequestComponent implements OnInit {
   }
 
   goToReviewRequest(request: Request) {
-    console.log("entering goToReview");
-    console.log(request);
+    //console.log("entering goToReview");
+    //console.log(request);
     // let currentRequest: any = this.requestService.fetchARequest(this.newRequest.reqId);
     // this.newRequest = {
     //   reqId: currentRequest.reqId,

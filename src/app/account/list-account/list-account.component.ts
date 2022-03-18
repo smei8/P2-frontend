@@ -40,7 +40,6 @@ export class ListAccountComponent implements OnInit {
 
   loadAllAccount() {
     this.accountService.fetchAllAccount().subscribe((response) => {
-      console.log(response);
       this.allAccount = response;
     });
   }

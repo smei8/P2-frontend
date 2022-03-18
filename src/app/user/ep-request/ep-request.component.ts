@@ -49,7 +49,7 @@ export class EpRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentEmployee = this.authService.retrieveUser();
-    console.log(this.currentEmployee);
+    //console.log(this.currentEmployee);
 
     this.loadAllEpReq();
   }
@@ -79,7 +79,7 @@ export class EpRequestComponent implements OnInit {
 
   loadAllEpReq() {
     this.requestService.viewAllEpRequest(this.currentEmployee.userID).subscribe((response) => {
-      console.log(response);
+      //console.log(response);
       this.allEpRequests = response;
     });
   }
@@ -132,7 +132,7 @@ export class EpRequestComponent implements OnInit {
 
   deleteRequest(reqId: number) {
     this.requestService.deleteRequest(reqId).subscribe((response) => {
-      console.log(response);
+      //console.log(response);
       this.loadAllEpReq();
     });
   }

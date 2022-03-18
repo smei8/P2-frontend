@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
 
   validateUser() {
     this.userService.login(this.newUser).subscribe(response => {
-      console.log(response);
+      //console.log(response);
       //let receivedUser: User = response;
       // if I received am empty user 
       //console.log(response.username)
       if(response.username == null) {
         // do the stuff for an empty user
         this.errorMessage = "Invalid Credentials!!";
-        console.log("BAD CREDENTIAL")
+        //console.log("BAD CREDENTIAL")
 
       } else {
         if (response.role_id == 1) {
