@@ -25,24 +25,26 @@
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="type" class="form-label">Request Type:</label>
-                                    <input type="text" 
-                                           class="form-control" 
-                                           id="type" 
-                                           placeholder="Enter request type"
-                                           name="requestType"
-                                           required #myType="ngModel"
-                                           [(ngModel)]="newRequest.reqType">
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="type" 
+                                        placeholder="Enter request type"
+                                        name="requestType"
+                                        required #myType="ngModel"
+                                        [(ngModel)]="newRequest.reqType">
                                     <div *ngIf="!myType.valid" class="small text-danger">Request Type requested!</div>
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="amount" class="form-label">Request Amount:</label>
-                                    <input type="text" 
-                                           class="form-control" 
-                                           id="amount" 
-                                           placeholder="Enter request amount"
-                                           name="requestAmount"
-                                           required #myAmount="ngModel"
-                                           [(ngModel)]="newRequest.reqAmount">
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="amount" 
+                                        placeholder="Enter request amount"
+                                        name="requestAmount"
+                                        required #myAmount="ngModel"
+                                        [(ngModel)]="newRequest.reqAmount">
                                     <div *ngIf="!myAmount.valid" class="small text-danger">Request Amount requested!</div>
                                 </div>
                                 <div class="mb-3 mt-3">
@@ -54,6 +56,22 @@
                                         <option value="1">Bruno</option>
                                         <option value="2">Levi</option>
                                     </select>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="file">Image of Receipt : </label>
+                                    <input 
+                                        type="file" 
+                                        class="form-control"
+                                        accept="image/*" 
+                                        name="reqImg"
+                                        (change)="selectFile($event)">
+
+                                        <!-- <div class="mb-3 mt-3">
+                                            <button class="btn btn-light" [disabled]="!selectedFiles" (click)="upload()">
+                                              Upload
+                                            </button>
+                                        </div> -->
+                                        <!-- multiple> -->
                                 </div>
                                 <div class="card-footer bg-warning">
                                     <button [disabled]="!myFormTemplate.valid" type="submit" class="btn btn-light">
@@ -86,13 +104,19 @@
                                 <td>{{ request.reqType }}</td>
                                 <td>{{ request.reqAmount | currency }}</td>
                                 <td>{{ request.reqStatus }}</td>
-                                <td>{{ request.submitDate }}</td>
-                                <td>{{ request.approvedDate }}</td>
+                                <td>{{ request.submitDate | date: "MM/dd/yy"}}</td>
+                                <td>{{ request.approvedDate | date: "MM/dd/yy" }}</td>
                                 <td>{{ request.manager }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning-small"
                                         (click)="deleteRequest(request.reqId)">
                                         <i class="material-icons">cancel</i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-warning-small"
+                                        (click)="goToUpload(request.reqId)">
+                                        <i class="material-icons">upload</i>
                                     </button>
                                 </td>
                             </tr>

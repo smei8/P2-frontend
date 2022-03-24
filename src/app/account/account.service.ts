@@ -11,7 +11,7 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   fetchAllAccount(): Observable<Account[]> {
-    return this.http.get<Account[]>("http://localhost:4040/api/all/accounts");
+    return this.http.get<Account[]>("http://localhost:5555/api/all/accounts");
   }
 
   // deleteAccount(userId: number): Observable<Account[]> {
@@ -22,10 +22,10 @@ export class AccountService {
   // }
 
   updateAccount(accountModel: Account): Observable<Account> {
-    return this.http.put<Account>("http://localhost:4040/api/accounts", JSON.stringify(accountModel));
+    return this.http.put<Account>("http://localhost:5555/api/accounts", JSON.stringify(accountModel));
   }
 
   fetchAAccount(userId: any): Observable<Account> {
-    return this.http.get<Account>("http://localhost:4040/api/accounts/"+userId);
+    return this.http.get<Account>("http://localhost:5555/api/accounts/"+userId);
   }
 }

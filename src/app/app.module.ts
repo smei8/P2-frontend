@@ -15,6 +15,7 @@ import { EmployeeComponent } from './user/employee/employee.component';
 import { ManagerComponent } from './user/manager/manager.component';
 import { EpRequestComponent } from './user/ep-request/ep-request.component';
 import { EditRequestComponent } from './reimbursement/edit-request/edit-request.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 
@@ -30,7 +31,8 @@ import { EditRequestComponent } from './reimbursement/edit-request/edit-request.
     EmployeeComponent,
     ManagerComponent,
     EpRequestComponent,
-    EditRequestComponent
+    EditRequestComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

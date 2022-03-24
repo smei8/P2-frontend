@@ -6,6 +6,9 @@ import { Account } from 'src/app/account/account.model';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { AccountService } from 'src/app/account/account.service';
+import { ReadVarExpr } from '@angular/compiler';
+import { Observable } from 'rxjs';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-ep-request',
@@ -19,7 +22,7 @@ export class EpRequestComponent implements OnInit {
 
   allEpRequests: Request[] = [];  //empty array to hold all current employee requests
   toggleAdd: boolean = false;
-  
+
   newAccount: Account = {
     userID: 0,
     username: "",
@@ -41,11 +44,17 @@ export class EpRequestComponent implements OnInit {
     manager: ''
   };
 
+  selectedFiles?: FileList;
+  currentFile?: File;
+  progress = 0;
+  message = '';
+  fileInfos?: Observable<any>;
+
   constructor(private requestService: RequestService,
               private router: Router,
               private authService: AuthService,
               private activatedRoute: ActivatedRoute, 
-              private accountService: AccountService) { }
+              private accountService: AccountService) { this.newRequest }
 
   ngOnInit(): void {
     this.currentEmployee = this.authService.retrieveUser();
@@ -62,57 +71,22 @@ export class EpRequestComponent implements OnInit {
     }
   }
 
-  // loadAllEpRequests() {
-  //   this.requestService.viewAllRequest().subscribe((response) => {
-  //     console.log(response);
-  //     console.log(this.allEpRequests);
-  //     this.allEpRequests = response;
-
-  //     for(let i = 0; i < this.allEpRequests.length; i++) {
-  //       if(this.allEpRequests[i].userId == this.currentEmployee.userID) {
-  //         this.newReqList[i] = this.allEpRequests[i];
-  //         console.log(this.newReqList);
-  //       }
-  //     }
-
-  //   });
-
   loadAllEpReq() {
     this.requestService.viewAllEpRequest(this.currentEmployee.userID).subscribe((response) => {
       //console.log(response);
       this.allEpRequests = response;
     });
   }
-    
-
-    //this.currentEmployee = this.authService.retrieveUser();
-    // this.requestService.viewAllRequest().subscribe((response) => {
-    //   console.log(response);
-    //   console.log(this.allEpRequests);
-
-    //   for(let i = 0; i < response.length; i++) {
-    //     if(response[i].userId == this.currentEmployee.userID) {
-    //       this.allEpRequests.push(response[i]);
-    //       //this.newRequest[i] = response[i];
-    //       console.log(this.allEpRequests);
-    //     }
-
-    //   }
-
-      
-    //   this.newReqList = this.allEpRequests;
-    // });
   
+  selectFile(event: any) {
+    console.log(event);
+    this.selectedFiles = event.target.files;
+    console.log(this.selectedFiles);
+  }
 
   addRequest() {
-    // let userID: any = this.activatedRoute.snapshot.paramMap.get("userID");
-    // console.log(userID);
-    // this.accountService.fetchAAccount(userID).subscribe((response) => {
-    //   console.log(response);
-    //   this.newAccount = response;
-    // });
-
     this.newRequest.userId = this.currentEmployee.userID;
+
     this.requestService.addRequest(this.newRequest).subscribe((response) => {
 
       this.newRequest = {
@@ -125,9 +99,15 @@ export class EpRequestComponent implements OnInit {
         approvedDate: '',
         manager: ''
       };
+      console.log(response);
 
       this.loadAllEpReq();
     });
+  }
+
+  goToUpload(reqId: number) {
+    this.router.navigate(['img-upload', reqId]);
+    console.log(reqId);
   }
 
   deleteRequest(reqId: number) {

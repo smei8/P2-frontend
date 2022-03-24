@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Account } from '../account/account.model';
@@ -12,14 +12,22 @@ import { User } from './login/user.model';
 })
 export class UserService {
 
+  // httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+  
   allAccounts: Account [] = [];
 
   constructor(private authService: AuthService, 
               private http: HttpClient) { }
 
+
+              
 login(user: User): Observable<User>{
+  // const httpOptions = {
+  //   headers: new HttpHeaders({'Content-Type': 'application/json'})
+  // }
   console.log(user);
-  return this.http.post<any>("http://localhost:4040/api/login", JSON.stringify(user));
+
+  return this.http.post<any>("http://localhost:5555/api/login", user);
 }
 
   // valiadteUser(newUser: User): User {

@@ -30,14 +30,10 @@ export class LoginComponent implements OnInit {
 
   validateUser() {
     this.userService.login(this.newUser).subscribe(response => {
-      //console.log(response);
-      //let receivedUser: User = response;
-      // if I received am empty user 
-      //console.log(response.username)
+
       if(response.username == null) {
         // do the stuff for an empty user
         this.errorMessage = "Invalid Credentials!!";
-        //console.log("BAD CREDENTIAL")
 
       } else {
         if (response.role_id == 1) {
@@ -55,19 +51,5 @@ export class LoginComponent implements OnInit {
         }
       }
     });
-    // let returnUser: User = this.userSerivce.valiadteUser(this.newUser);
-
-    // if(returnUser.userName == "") {
-    //   // invalid 
-    //   this.errorMessage = "Invalid Credentials!!"
-    // } else {
-    //   if(returnUser.role_id == 1) {
-    //     this.router.navigate(['request-crud']);
-    //   } else {
-    //     this.router.navigate(['acount-crud']);
-    //   }
-    //   //logged in
-    //   console.log("Logged in successful!")
-    // }
   }
 }
